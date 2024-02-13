@@ -434,6 +434,24 @@
   )
 
 
+  (wire (pts (xy 119.38 64.77) (xy 130.81 64.77))
+    (stroke (width 0) (type default))
+    (uuid 3a6dc3af-7f85-46dc-b284-e99f27f0fe37)
+  )
+  (wire (pts (xy 119.38 67.31) (xy 130.81 67.31))
+    (stroke (width 0) (type default))
+    (uuid 3ba8760d-7232-4d7e-9e1d-98bd11a5a5ab)
+  )
+
+  (label "SCL" (at 124.46 64.77 0) (fields_autoplaced)
+    (effects (font (size 1.27 1.27)) (justify left bottom))
+    (uuid 8413439f-f217-4a3a-8570-dabacbbe241c)
+  )
+  (label "SDA" (at 124.46 67.31 0) (fields_autoplaced)
+    (effects (font (size 1.27 1.27)) (justify left bottom))
+    (uuid de28173a-7dbe-4755-9280-5b8fbdfe1aea)
+  )
+
   (symbol (lib_id "Sensor_Motion:LIS3DH") (at 41.91 53.34 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
     (uuid 67580db1-76b0-45c2-9fc9-5e078e73ccca)
