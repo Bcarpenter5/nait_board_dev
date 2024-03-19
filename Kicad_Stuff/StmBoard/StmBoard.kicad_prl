@@ -8,7 +8,7 @@
       "+3.3V",
       "GND",
       "VCC",
-      "Net-(U7-VCC)",
+      "Net-(J1-VBUS)",
       "Net-(U1-PC15)",
       "Net-(U1-PC14)",
       "/reset",
