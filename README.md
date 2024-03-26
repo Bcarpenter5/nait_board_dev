@@ -6,4 +6,7 @@
 [stm32G031K8t6](https://www.digikey.ca/en/products/detail/stmicroelectronics/STM32G031K8T6/10300267)
 
 
-MINI 5PTP
+### the usb device on jlcpcb
+> MINI 5PTP
+
+> Note - now sent in and finished
