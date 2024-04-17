@@ -7,8 +7,11 @@
 #include "clock.h"
 #include "ssd1306_conf.h"
 
-#define SSD1306_MIRROR_VERT
-#define SSD1306_MIRROR_HORIZ
+// #define SSD1306_MIRROR_VERT
+// #define SSD1306_MIRROR_HORIZ
+#undef SSD1306_MIRROR_VERT
+#undef SSD1306_MIRROR_HORIZ
+
 
 void ssd1306_Reset(void) {
     /* for I2C - do nothing */
