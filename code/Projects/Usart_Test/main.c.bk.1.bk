@@ -1,0 +1,80 @@
+//////////////////////////////////////////////////////////////////////////////////////
+// Project: Usart Demo test
+//       
+//       
+// Author: Brandon Carpenter 
+//       
+//       
+//       
+// updates: 
+//       created: 01/24/2024
+//       
+//       
+//////////////////////////////////////////////////////////////////////////////////////
+#include <stdio.h>
+#include <stdlib.h>
+#include "stm32g031xx.h"
+
+#include "gpio.h"
+#include "clock.h"
+#include "UART.h"
+#include "uart.h"
+
+
+
+
+int main(void) {
+
+    // Enable interrupts globally
+    __enable_irq();
+    // Enable USB clock
+
+    /// note the vcom port is usart 2 on PA2 and PA3
+    GPIO_InitAlternateF(GPIOA, 2, 1); // set PA2 to alternate function 1 TX
+    GPIO_InitAlternateF(GPIOA, 3, 1); // set PA3 to alternate function 1 RX
+
+
+    // Configure system clock
+    ClockSet(_20MHz);
+    //
+    // GPIO_InitAlternateF(GPIOB, 6, 1); // set PB6 to alternate function 1 TX
+    // GPIO_InitAlternateF(GPIOB, 7, 1); // set PB7 to alternate function 1 RX
+    RCC->APBENR1 |= RCC_APBENR1_USART2EN;
+    /* 
+    // enable the usart 2 clock
+
+    // set the Usrt_ker_clk to 20MHz
+    RCC->CCIPR &= ~RCC_CCIPR_USART1SEL_Msk; // set this to zero for pll ie the default value
+
+    USART2->CR1 &= ~(USART_CR1_UE|USART_CR1_TE|USART_CR1_RE); // disable the usar
+    //disable over runs
+    USART2->CR3 |= USART_CR3_OVRDIS;
+
+    USART2->RQR |= USART_RQR_RXFRQ; // clear the RXNE flag like carlos sudgested
+    //
+    // set the baud rate 20 115200
+    
+    // usartBRR = usrt_ker_clk / USARTDIV
+    // USARTDIV = 20 000 000 / 115200 = 173.6
+
+    USART2->BRR = 173; // 115200 baud
+
+    USART2->CR1 |= USART_CR1_UE|USART_CR1_TE|USART_CR1_RE ; // enable the usar  */
+    TimerInit();
+    UART_Init(USART2, 115200, 0);
+
+
+
+    for(;;) {
+        // send a character 
+        while(!(USART2->ISR & USART_ISR_TXE_TXFNF ));
+        USART2->TDR = 'B';
+        // wait for the character to be sent
+        DelayMs(500);
+
+
+    }
+}
+
+
+/*************************** End of file ****************************/

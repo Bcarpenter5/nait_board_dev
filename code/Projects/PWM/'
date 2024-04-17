@@ -1,0 +1,85 @@
+//////////////////////////////////////////////////////////////////////////////////////
+// Project: PWM Test
+//       
+//       
+// Author: Brandon Carpenter 
+//       
+//       
+//       
+// updates: 
+//       created: 01/19/2024
+//       
+//       
+//////////////////////////////////////////////////////////////////////////////////////
+
+#include <stdio.h>
+#include <stdlib.h>
+#include "stm32g031xx.h"
+#include "gpio.h"
+#include "clock.h"
+
+
+
+int main(void) {
+
+    // Enable interrupts globally
+    __enable_irq();
+
+    // Configure system clock
+    ClockSet(_20MHz);
+
+    
+
+    GPIO_InitAlternateF(GPIOA, 8, 2);
+
+    // Enable clock for TIM1
+    RCC->APBENR2 |= RCC_APBENR2_TIM1EN;
+    // RCC->CCIPR |= RCC_CCIPR_TIM1SEL_Msk; // Set clock to be PllQclk otherwise it will be TIMPCLK
+
+    // Check if TIM1 clock enable was successful
+    if ((RCC->APBENR2 & RCC_APBENR2_TIM1EN) != RCC_APBENR2_TIM1EN) {
+        printf("Error: TIM1 clock enable failed!\n");
+        // Error handling: TIM1 clock enable failed
+        while (1); // You might want to handle this more gracefully
+    }
+
+    // Configure TIM1 for PWM
+    TIM1->CR1 &= ~TIM_CR1_DIR; // Set timer to count up
+    TIM1->CR1 &= ~TIM_CR1_CMS; // Set timer to edge-aligned mode
+
+    TIM1->CR1 |= TIM_CR1_ARPE; // Enable auto-reload preload register
+    // Configure PWM mode 1
+    TIM1->CCMR1 |= TIM_CCMR1_OC1M_1 | TIM_CCMR1_OC1M_2;
+
+    TIM1->CCMR1 |= TIM_CCMR1_OC1PE; // Enable preload register
+
+    // Set polarity to active high
+    TIM1->CCER &= ~TIM_CCER_CC1P; // Clear polarity bit
+    TIM1->CCER |= TIM_CCER_CC1E;  // Enable output
+
+    // Set period, duty cycle, and update registers
+    TIM1->PSC = 0;     // Set prescaler to 0
+    TIM1->ARR = 1000;   // Set auto-reload register to 1000 (Period)
+    TIM1->CCR1 = 500;   // Set duty cycle to 50%
+    TIM1->EGR |= TIM_EGR_UG; // Update registers
+
+    // Enable main output
+    TIM1->BDTR |= TIM_BDTR_MOE;
+
+    // Enable timer after all configurations are done
+    TIM1->CR1 |= TIM_CR1_CEN; // Enable timer
+    printf("PWM Test\n");
+    TimerInit();
+    printf("TIM1->CR1: %x\n", TIM1->CR1);
+    printf("sysetm clock %d\n", SystemCoreClock);
+
+
+
+    for(;;) {
+    DelayMs(1000);
+    printf("TIM1->CR1: %x\n", TIM1->CR1);
+
+    }
+}
+
+/*************************** End of file ****************************/

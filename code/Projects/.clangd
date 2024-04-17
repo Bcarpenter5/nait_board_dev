@@ -1,0 +1,15 @@
+CompileFlags: # Tweak the parse settings
+  Add: [ 
+  -I/home/bjc1269/Documents/STMDEV/NucleoLearning/lib/stm32-ssd1306/ssd1306/,
+  -I/home/bjc1269/Documents/STMDEV/NucleoLearning/Projects/Proj2/STM32G0xx/Device/Include/, 
+  -I/home/bjc1269/Documents/STMDEV/NucleoLearning/Projects/Proj2/STM32G0xx/, 
+  -I/home/bjc1269/Documents/STMDEV/NucleoLearning/Projects/Proj2/CMSIS_5/, 
+  -I/home/bjc1269/Documents/STMDEV/NucleoLearning/Projects/Proj2/CMSIS_5/CMSIS/Core/Include/, 
+  -I/home/bjc1269/Documents/STMDEV/NucleoLearning/Projects/Proj2/STM32G0xx/Device/Include/,
+  -I/home/bjc1269/Documents/STMDEV/NucleoLearning/Projects/Proj2/,
+  -I/home/bjc1269/Documents/STMDEV/NucleoLearning/lib/inc,
+  -I/home/bjc1269/Documents/STMDEV/NucleoLearning/lib/src,
+  -I/home/bjc1269/Documents/STMDEV/NucleoLearning/lib/stm32-ssd1306/ssd1306/,
+  -I/home/bjc1269/Documents/STMDEV/NucleoLearning/lib/IRMP-3.6.3/src
+  ]
+
